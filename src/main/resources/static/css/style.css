@@ -1,0 +1,53 @@
+/* title */
+        .navbar-default .navbar-brand {
+            color: #fff;
+        }
+        .very-severe-underweight-indicator{
+            height:12px;
+            width:12px;
+            background: #334CFF;
+        }
+
+        .severe-underweight-indicator{
+             height:12px;
+             width:12px;
+             background: #337AFF;
+        }
+        .underweight-indicator{
+             height:12px;
+             width:12px;
+             background: #33BBFF;
+        }
+        .normal-indicator{
+            height:12px;
+            width:12px;
+            background: #33FF7D;
+        }
+        .overweight-indicator{
+            height: 12px;
+            width: 12px;
+            background: #FADF32;
+        }
+
+        .obese-class-I-indicator{
+            height: 12px;
+            width: 12px;
+            background: #FAAE32;
+        }
+
+        .obese-class-II-indicator{
+            height: 12px;
+            width: 12px;
+            background: #FA7232;
+        }
+
+         .obese-class-III-indicator{
+             height: 12px;
+             width: 12px;
+             background: #FA3832;
+         }
+         .bmi-button{
+            width:100%;
+            padding: 5px;
+
+         }

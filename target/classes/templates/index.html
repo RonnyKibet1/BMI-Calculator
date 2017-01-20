@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>BMI Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-latest.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="container">
+        <!--Navbar-->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid btn-success">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Body Mass Index(BMI) Calculator</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav buttonList">
+                        <li style="display:none" class="active"><button type="button" class="btn btn-default navbar-btn btn-success desktopVersionButton">Desktop Version</button></li>
+                        <li style="display:none"><button type="button"  class="btn btn-default navbar-btn btn-success androidVersionButton">Android Version</button></li>
+                        <li style="display:none"><button type="button"  class="btn btn-default navbar-btn btn-success iosVersionButton">iOS Version</button></li>
+
+                    </ul>
+
+
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+
+        </nav>
+        <!-- end navbar-->
+        <form title="Loan calculator form"  th:action="@{/}" th:object="${userDetails}"  method="post">
+                <!-- User height-->
+            <label for="userHeight">Height: </label>
+            <div class="row" id="userHeight">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" th:field="*{userFeet}" class="form-control" id="loanTermInYearInput" aria-label="Enter your height in feet" aria-describedby="sizing-addon1"/>
+                        <span class="input-group-addon">Feet(ft)</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" th:field="*{userInches}" class="form-control" id="loanTermMonthsInput" aria-label="Enter your height in inches optional" aria-describedby="sizing-addon1"/>
+                        <span class="input-group-addon">Inches(in)</span>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+            <label for="weightInput">Weight: </label>
+            <div class="input-group">
+                <input type="text" th:field="*{userWeight}"  class="form-control" id="weightInput" aria-label="Enter your weight in pounds" aria-describedby="sizing-addon1"/>
+                <span class="input-group-addon">Pounds(lbs)</span>
+            </div>
+
+            <br/>
+            <button  type="submit" class="btn btn-warning btn-lg btn-block" value="Calculate" id="calcButton">Calculate</button>
+        </form>
+
+        <br/>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Result</h3>
+            </div>
+            <div class="panel-body">
+                <!--BMI BADGE RESULT-->
+
+
+                <button th:if="${userDetails.userHealthCategory} == 'Very Severely Underweight' or ${userDetails.userHealthCategory} == 'Severely Underweight' or ${userDetails.userHealthCategory} == 'Underweight'" class="btn bmi-button btn-primary" type="button">
+                    <span>Your BMI</span> <span class="badge" th:text="${userDetails.userBMI}"></span>
+                    <br/>
+                    <span th:text="${userDetails.userHealthCategory}"></span>
+                </button>
+                <button th:if="${userDetails.userHealthCategory} == 'Normal'" class="btn bmi-button btn-success" type="button">
+                    <span>Your BMI</span> <span class="badge" th:text="${userDetails.userBMI}"></span>
+                    <br/>
+                    <span th:text="${userDetails.userHealthCategory}"></span>
+                </button>
+                <button th:if="${userDetails.userHealthCategory} == 'Overweight'" class="btn bmi-button btn-warning" type="button">
+                    <span>Your BMI</span> <span class="badge" th:text="${userDetails.userBMI}"></span>
+                    <br/>
+                    <span th:text="${userDetails.userHealthCategory}"></span>
+                </button>
+                <button th:if="${userDetails.userHealthCategory} == 'Obese Class I' or ${userDetails.userHealthCategory} == 'Obese Class II'" class="btn bmi-button btn-warning" type="button">
+                    <span>Your BMI</span> <span class="badge" th:text="${userDetails.userBMI}"></span>
+                    <br/>
+                    <span th:text="${userDetails.userHealthCategory}"></span>
+                </button>
+                <button th:if="${userDetails.userHealthCategory} == 'Obese Class III'" class="btn bmi-button btn-danger" type="button">
+                    <span>Your BMI</span> <span class="badge" th:text="${userDetails.userBMI}"></span>
+                    <br/>
+                    <span th:text="${userDetails.userHealthCategory}"></span>
+                </button>
+
+                <!-- I am thinkin of add a chart here we shall see-->
+
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Category</th>
+                            <th>BMI Range</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><div class="very-severe-underweight-indicator"></div></td>
+                            <td>Very Severely Underweight</td>
+                            <td>&lt; 16</td>
+                        </tr>
+                        <tr>
+                            <td><div class="severe-underweight-indicator"></div></td>
+                            <td>Severely Underweight</td>
+                            <td>16.0 - 16.9</td>
+                        </tr>
+                        <tr>
+                            <td><div class="underweight-indicator"></div></td>
+                            <td>Underweight</td>
+                            <td>17.0 - 18.4</td>
+                        </tr>
+                        <tr>
+                            <td><div class="normal-indicator"></div></td>
+                            <td>Normal</td>
+                            <td>18.5 - 24.9</td>
+                        </tr>
+                        <tr>
+                            <td><div class="overweight-indicator"></div></td>
+                            <td>Overweight</td>
+                            <td>25.0 - 29.9</td>
+                        </tr>
+                        <tr>
+                            <td><div class="obese-class-I-indicator"></div></td>
+                            <td>Obese Class I</td>
+                            <td>30.0 - 34.9</td>
+                        </tr>
+                        <tr>
+                            <td><div class="obese-class-II-indicator"></div></td>
+                            <td>Obese Class II</td>
+                            <td>35.0 - 39.9</td>
+                        </tr>
+                        <tr>
+                            <td><div class="obese-class-III-indicator"></div></td>
+                            <td>Obese Class III</td>
+                            <td>&ge; 40</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
